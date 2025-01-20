@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:planet/models/cosmos_article.dart';
 import 'package:planet/widgets/space_background.dart';

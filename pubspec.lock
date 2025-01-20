@@ -155,6 +155,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  object_3d:
+    dependency: "direct main"
+    description:
+      name: object_3d
+      sha256: "0634f7a5deb7920c7e594008f2a163022546c38d305f5f7b6d3c9eba14e44c11"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   path:
     dependency: transitive
     description:

@@ -19,6 +19,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   void initState() {
     super.initState();
 
+    // Initialize an empty list for star positions
+    starPositions = [];
+
     // Animation for comet fall
     _controller = AnimationController(vsync: this, duration: Duration(seconds: 3));
     _cometAnimation = Tween<Offset>(begin: Offset(0, -1), end: Offset(0, 1)).animate(
@@ -34,7 +37,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     // Generate random star positions after context is available
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
-        // Generate star positions once the widget tree is built
         starPositions = List.generate(100, (index) {
           return Offset(
             Random().nextDouble() * MediaQuery.of(context).size.width,
@@ -81,7 +83,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
             ),
             child: _buildStars(),
           ),
-          
+
           // Spinning Globe
           Center(
             child: Transform.rotate(
@@ -138,6 +140,11 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
   // Function to build and animate the stars
   Widget _buildStars() {
+    // Check if starPositions is empty
+    if (starPositions.isEmpty) {
+      return Container();
+    }
+
     return AnimatedBuilder(
       animation: _starController,
       builder: (context, child) {

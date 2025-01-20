@@ -28,12 +28,12 @@ class AnimatedSideDrawer extends StatelessWidget {
             ),
           ),
           child: ListView(
-            padding: EdgeInsets.zero,
+            padding: EdgeInsets.all(16),
             children: [
               DrawerHeader(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/images/cosmos_header.jpg'),
+                    image: AssetImage('assets/images/globe.png'),
                     fit: BoxFit.cover,
                   ),
                 ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:planet/models/cosmos_article.dart';
 import 'package:planet/screens/article_screen.dart';
+import 'package:planet/screens/explore_screen.dart';
+import 'package:planet/screens/notification_screen.dart';
+import 'package:planet/screens/search_screen.dart';
 import 'package:planet/theme/app_theme.dart';
 import 'package:planet/widgets/animated_bottom_nav.dart';
 import 'package:planet/widgets/animated_side_drawer.dart';
@@ -14,7 +17,9 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+  late AnimationController _drawerAnimationController;
+  late Animation<double> _drawerAnimation;
   int _currentIndex = 0;
   bool _isDrawerVisible = false;
 
@@ -22,26 +27,45 @@ class _HomeScreenState extends State<HomeScreen> {
     CosmosArticle(
       title: 'Exploring Black Holes',
       summary: 'Journey into the heart of cosmic mysteries',
-      imageUrl: 'asset/black_hole.jpg',
+      imageUrl: 'assets/images/black_hole.jpg',
     ),
     CosmosArticle(
       title: 'The Milky Way Galaxy',
       summary: 'Our cosmic home in the vast universe',
-      imageUrl: 'asset/milkyway.jpg',
+      imageUrl: 'assets/images/milkyway.jpg',
     ),
     CosmosArticle(
       title: 'Exoplanets: New Worlds',
       summary: 'Discovering planets beyond our solar system',
-      imageUrl: 'asset/exoplanet.jpg',
+      imageUrl: 'assets/images/exoplanet.jpg',
     ),
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _drawerAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _drawerAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(parent: _drawerAnimationController, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
   void dispose() {
+    _drawerAnimationController.dispose();
     super.dispose();
   }
 
   void _toggleDrawer() {
+    if (_drawerAnimationController.isCompleted) {
+      _drawerAnimationController.reverse();
+    } else {
+      _drawerAnimationController.forward();
+    }
+
     setState(() {
       _isDrawerVisible = !_isDrawerVisible;
     });
@@ -63,10 +87,32 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           MovingStarsBackground(),
-          _buildMainContent(),
-          AnimatedSideDrawer(
-            onClose: _toggleDrawer,
-            drawerAnimationValue: _isDrawerVisible ? 1.0 : 0.0,
+          AnimatedBuilder(
+            animation: _drawerAnimation,
+            builder: (context, child) {
+              return Transform(
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.001)
+                  ..rotateY(_drawerAnimation.value * -0.5),
+                alignment: Alignment.centerRight,
+                child: child,
+              );
+            },
+            child: _buildMainContent(),
+          ),
+          AnimatedBuilder(
+            animation: _drawerAnimation,
+            builder: (context, child) {
+              return Transform(
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.001)
+                  ..translate(_drawerAnimation.value * MediaQuery.of(context).size.width * 0.7)
+                  ..rotateY(_drawerAnimation.value * -0.5),
+                alignment: Alignment.centerLeft,
+                child: child,
+              );
+            },
+            child: AnimatedSideDrawer(onClose: _toggleDrawer, drawerAnimationValue: _isDrawerVisible ? 1.0 : 0.0),
           ),
           Positioned(
             bottom: 16,
@@ -87,9 +133,26 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildMainContent() {
+    switch (_currentIndex) {
+      case 0:
+        return _buildHomeContent();
+      case 1:
+        return ExploreScreen();
+      case 2:
+        return SearchScreen();
+      case 3:
+        return NotificationScreen();
+      default:
+        return _buildHomeContent();
+    }
+  }
+
+  Widget _buildHomeContent() {
     return ListView(
       padding: EdgeInsets.all(16),
+      
       children: [
+        SizedBox(height: 20),
         SizedBox(height: AppBar().preferredSize.height),
         Text(
           'Discover the Cosmos',
