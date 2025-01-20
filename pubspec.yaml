@@ -37,6 +37,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   object_3d: ^1.0.0
+  lottie: ^2.7.0
 
 dev_dependencies:
   flutter_test:

@@ -33,7 +33,7 @@ class AnimatedSideDrawer extends StatelessWidget {
               DrawerHeader(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/images/globe.png'),
+                    image: AssetImage('assets/images/astro.jpg'),
                     fit: BoxFit.cover,
                   ),
                 ),

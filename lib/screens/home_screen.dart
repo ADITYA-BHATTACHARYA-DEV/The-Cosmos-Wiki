@@ -39,6 +39,16 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       summary: 'Discovering planets beyond our solar system',
       imageUrl: 'assets/images/exoplanet.jpg',
     ),
+     CosmosArticle(
+      title: 'Exoplanets: New Worlds',
+      summary: 'Discovering planets beyond our solar system',
+      imageUrl: 'assets/images/sp2.jpg',
+    ),
+     CosmosArticle(
+      title: 'Global Explore',
+      summary: 'Discovering planets beyond our solar system',
+      imageUrl: 'assets/images/space1.jpg',
+    ),
   ];
 
   @override

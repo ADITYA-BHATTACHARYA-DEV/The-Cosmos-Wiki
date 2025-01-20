@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:planet/theme/app_theme.dart';
 
 class ChatbotButton extends StatefulWidget {
@@ -71,10 +72,11 @@ class _ChatbotButtonState extends State<ChatbotButton> with SingleTickerProvider
                     ],
                   ),
                 ),
-                child: Icon(
-                  Icons.chat_bubble,
-                  color: Colors.white,
-                  size: 30,
+                child: Lottie.asset(
+                  'assets/images/bot1.json',
+                  // errorBuilder: (context, error, stackTrace) {
+                  //   return Icon(Icons.error, color: Colors.red);
+                  // },
                 ),
               ),
             ),
@@ -260,4 +262,3 @@ class GoogleLoadingBarPainter extends CustomPainter {
   @override
   bool shouldRepaint(GoogleLoadingBarPainter oldDelegate) => true;
 }
-

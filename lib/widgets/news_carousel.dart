@@ -15,17 +15,17 @@ class _NewsCarouselState extends State<NewsCarousel> {
     {
       'title': 'New Exoplanet Discovered',
       'description': 'Astronomers find Earth-like planet in habitable zone',
-      'image': 'assets/images/exoplanet.jpg',
+      'image': 'assets/images/sp3.jpg',
     },
     {
       'title': 'Supernova Explosion Observed',
       'description': 'Hubble telescope captures rare stellar event',
-      'image': 'assets/images/exoplanet.jpg',
+      'image': 'assets/images/space.jpeg',
     },
     {
       'title': 'Mars Rover Makes Groundbreaking Discovery',
       'description': 'Evidence of ancient microbial life found on Mars',
-      'image': 'assets/images/exoplanet.jpg',
+      'image': 'assets/images/sp1.jpeg',
     },
   ];
 

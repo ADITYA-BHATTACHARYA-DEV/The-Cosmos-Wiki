@@ -7,7 +7,7 @@ class ExploreScreen extends StatelessWidget {
     {
       'title': 'Nebula Discoveries',
       'description': 'New stellar nurseries found in the Orion constellation',
-      'image': 'assets/images/exoplanet.jpg',
+      'image': 'assets/images/nebula.jpg',
     },
     {
       'title': 'Mars Rover Update',
@@ -23,6 +23,11 @@ class ExploreScreen extends StatelessWidget {
       'title': 'Black Hole Merger',
       'description': 'Gravitational waves from colliding black holes detected',
       'image': 'assets/images/black_hole.jpg',
+    },
+     {
+      'title': 'Supernova',
+      'description': 'Gravitational waves from SuperNova',
+      'image': 'assets/images/space.jpeg',
     },
   ];
 
